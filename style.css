@@ -1,6 +1,6 @@
 * {
   font-family: Arial;
-  font-size: medium;
+  font-size: large;
 }
 
 html,
@@ -30,14 +30,19 @@ body {
   background-color: gainsboro;
   border-radius: 10px;
   margin: 15px 15px 0px 15px;
-  height: 120px;
+  flex: 1;
   border: 3px solid black;
+}
+
+.display p {
+  margin: 10px 10px 10px 10px;
+  font-size: 2.5em;
 }
 
 .buttons {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 3 1 0;
   gap: 15px;
   background-color: gray;
   border-radius: 10px;
@@ -46,33 +51,22 @@ body {
 
 .top-buttons {
   display: flex;
+  flex: 1 1 0;
   gap: 15px;
 }
 
 .clear {
-  flex: 1;
   background-color: lightcoral;
-  border-radius: 10px;
-  height: 70px;
-  margin: 0;
-  padding: 0;
-  border: 3px solid black;
 }
 
 .delete {
-  flex: 1;
   background-color: lightblue;
-  border-radius: 10px;
-  height: 70px;
-  margin: 0;
-  padding: 0;
-  border: 3px solid black;
 }
 
 .bottom-buttons {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 4 1 0;
   gap: 15px;
 }
 
@@ -82,10 +76,18 @@ body {
   gap: 15px;
 }
 
-.row button {
+button {
   flex: 1;
   border-radius: 10px;
   margin: 0;
   padding: 0;
   border: 3px solid black;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:active {
+  opacity: 0.6;
 }
