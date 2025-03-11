@@ -31,8 +31,25 @@ const clearButton = document.querySelector(".clear");
 const deleteButton = document.querySelector(".delete");
 const buttons = document.querySelectorAll(".bottom-buttons button");
 
+clearButton.addEventListener("click", () => {
+  displayText.textContent = "0";
+});
+
+deleteButton.addEventListener("click", () => {
+  if (displayText.textContent !== "0") {
+    len = displayText.textContent.length;
+    displayText.textContent = displayText.textContent.slice(0, len - 1);
+  }
+});
+
 buttons.forEach((button) => {
   button.addEventListener("click", (event) => {
-    displayText.textContent = event.target.innerText;
+    if (displayText.textContent === "0") {
+      if (event.target.innerText !== "0") {
+        displayText.textContent = "" + event.target.innerText;
+      }
+    } else {
+      displayText.textContent += event.target.innerText;
+    }
   });
 });
