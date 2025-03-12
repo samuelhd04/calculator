@@ -19,7 +19,7 @@ function operate(a, b, symbol) {
     return add(a, b);
   } else if (symbol === "-") {
     return subtract(a, b);
-  } else if (symbol === "*") {
+  } else if (symbol === "x") {
     return multiply(a, b);
   } else if (symbol === "/") {
     return divide(a, b);
@@ -32,24 +32,45 @@ const deleteButton = document.querySelector(".delete");
 const buttons = document.querySelectorAll(".bottom-buttons button");
 
 clearButton.addEventListener("click", () => {
-  displayText.textContent = "0";
+  displayText.textContent = "";
 });
 
 deleteButton.addEventListener("click", () => {
-  if (displayText.textContent !== "0") {
-    len = displayText.textContent.length;
+  if (displayText.textContent !== "") {
+    let len = displayText.textContent.length;
     displayText.textContent = displayText.textContent.slice(0, len - 1);
   }
 });
 
 buttons.forEach((button) => {
   button.addEventListener("click", (event) => {
-    if (displayText.textContent === "0") {
-      if (event.target.innerText !== "0") {
-        displayText.textContent = "" + event.target.innerText;
-      }
-    } else {
+    if (event.target.innerText !== "=") {
       displayText.textContent += event.target.innerText;
+    } else {
+      for (i = 0; i < displayText.textContent.length; i++) {
+        if (
+          (displayText.textContent[i] === "+" ||
+            displayText.textContent[i] === "-" ||
+            displayText.textContent[i] === "x" ||
+            displayText.textContent[i] === "/") &&
+          displayText.textContent.length > 2
+        ) {
+          let len = displayText.textContent.length;
+          let a = displayText.textContent.slice(0, i);
+          let b = displayText.textContent.slice(i + 1, len);
+          let symbol = displayText.textContent[i];
+
+          if (symbol === "/" && b === "0") {
+            displayText.textContent = "Error";
+          } else {
+            a = parseFloat(a);
+            b = parseFloat(b);
+            displayText.textContent = operate(a, b, symbol).toFixed(1);
+          }
+
+          break;
+        }
+      }
     }
   });
 });
